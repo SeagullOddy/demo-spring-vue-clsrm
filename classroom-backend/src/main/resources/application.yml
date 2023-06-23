@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ketangphi?characterEncoding=utf8&serverTimezone=GMT
+    username: root
+    password: toor
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8888
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+
+
+
+#七牛云配置
+#qiniu:
+#  #自己账户的ak sk
+#  accessKey: VzBjRWxNI6LOktAdXW8ZSbInG05V95NaSXQsXUjh
+#  secretKey: yVo6cBLcygiSGJZVQXzK29atKbYKO43Wl82NPTBs
+#  #存储空间名
+#  bucket: ketamgpai
+#  # 自己的存储空间域名
+#  cdnProfile: qkuucncq0.hn-bkt.clouddn.com
+#  #采用的协议 http:// 还是 https://  个人此空间由于没配域名 采用的是http协议  http://qa7oc48w0.bkt.clouddn.com/logo
+#  protocol: http://

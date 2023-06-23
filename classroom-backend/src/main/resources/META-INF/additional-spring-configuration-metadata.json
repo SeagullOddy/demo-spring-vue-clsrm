@@ -1,0 +1,33 @@
+{
+  "properties": [
+    {
+      "name": "upload.qiniu.access-key",
+      "type": "java.lang.String",
+      "description": "Description for upload.qiniu.access-key."
+    },
+    {
+      "name": "qiniu.accessKey",
+      "type": "java.lang.String",
+      "description": "Description for qiniu.accessKey."
+    },
+    {
+      "name": "qiniu.secretKey",
+      "type": "java.lang.String",
+      "description": "Description for qiniu.secretKey."
+    },
+    {
+      "name": "qiniu.bucket",
+      "type": "java.lang.String",
+      "description": "Description for qiniu.bucket."
+    },
+    {
+      "name": "qiniu.cdnProfile",
+      "type": "java.lang.String",
+      "description": "Description for qiniu.cdnProfile."
+    },
+    {
+      "name": "qiniu.protocol",
+      "type": "java.lang.String",
+      "description": "Description for qiniu.protocol."
+    }
+  ] }
