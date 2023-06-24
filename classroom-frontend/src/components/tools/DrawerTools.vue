@@ -15,7 +15,7 @@
                 width: 100%;">
     <div style="display: flex;">
       <el-button @click="drawer = true" type="text" class="icon-ic_header_hamberg font_family"
-           style="margin:8px 0 0 -10px;font-size: 20px;color: #5F6368;"></el-button>
+                 style="margin:8px 0 0 -10px;font-size: 20px;color: #5F6368;"></el-button>
       <!--   抽屉   -->
       <el-drawer
           direction="ltr" :show-close="false" :modal="false"
@@ -141,8 +141,7 @@
       <!-- 面包屑 -->
       <el-breadcrumb separator-class="el-icon-arrow-right" style="margin:22px 0 0 44px">
         <el-breadcrumb-item :to="{ path: '/courseManage' }">我的课堂</el-breadcrumb-item>
-        <el-breadcrumb-item style="color: #1F2023">{{ now.name }}<span
-            style="margin-left:12px">{{ now.className }}</span></el-breadcrumb-item>
+        <el-breadcrumb-item style="color: #1F2023">课程内容</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <AccountTools :info="{user:info.user}"></AccountTools>

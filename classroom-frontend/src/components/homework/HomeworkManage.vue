@@ -4,7 +4,7 @@
 
       <div class="header-right">
         <span><i class="iconfont iconxiaoxi1" style="font-size: 32px;color: #5F6368;"></i></span>
-        <span><img src="" style="width:30px;height:30px"></span>
+        <span><img src="" style="width:30px;height:30px" alt=""></span>
       </div>
     </div>
 

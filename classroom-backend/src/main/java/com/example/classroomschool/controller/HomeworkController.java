@@ -51,7 +51,7 @@ public class HomeworkController {
    * 上传作业文件
    */
   @RequestMapping("/upload")
-  public String upload(@RequestParam String homeworkIdSting, @RequestParam String studentIdSting,
+  public String upload(@RequestParam("homeworkIds") String homeworkIdSting, @RequestParam("studentIds") String studentIdSting,
       @RequestParam MultipartFile file) throws Exception {
     int homeworkId = Integer.parseInt(homeworkIdSting);
     Homework homework = homeworkService.findById(homeworkId);

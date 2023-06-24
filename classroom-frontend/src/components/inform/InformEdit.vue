@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="sapp">
     <!--发布公告点击页面-->
     <div class="publishWord home_work">
       <el-form ref="ruleForm" style="width: 1182px">
@@ -146,7 +146,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .w-e-toolbar {
   display: flex !important;
   padding: 0 6px !important;
@@ -162,17 +162,19 @@ export default {
   position: static !important;
 }
 
-#app {
+#sapp {
   margin: 0;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
 .home_work {
-  width: 1182px;
+  margin-top: 20px;
   padding: 20px 20px 10px;
   border: 1px solid #E2E6ED;
-  margin: auto;
 }
 
 .display {

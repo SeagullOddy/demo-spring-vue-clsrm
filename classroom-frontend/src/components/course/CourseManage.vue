@@ -181,7 +181,7 @@ export default {
     todoAlert() {
       this.$message({
         center: true,
-        message: "暂未实现",
+        message: "该功能暂未开放",
         type: "warning"
       });
     },

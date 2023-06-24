@@ -4,7 +4,7 @@
     <div v-if="info.identity === 1" style="width: 100%;height: auto;padding-top: 40px;">
       <div style="display: flex;align-items: center">
         <el-button @click="edit = true" type="primary">发布个人作业</el-button>
-        <el-button @click="edit = true" plain style="color: blue">发布小组作业</el-button>
+        <el-button @click="todoAlert" plain style="color: blue">发布小组作业</el-button>
         <div @click="$router.push('future')" style="padding-left: 26px;
                             background: url('https://www.ketangpai.com/Public/Home/img/taskAachievementsL.png') left no-repeat;
                             background-size: 20px;
@@ -73,6 +73,15 @@ export default {
     }
   },
   props: ['info'],
+  methods: {
+    todoAlert() {
+      this.$message({
+        center: true,
+        message: '暂未开放',
+        type: 'warning'
+      })
+    }
+  }
 }
 </script>
 

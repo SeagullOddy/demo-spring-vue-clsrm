@@ -9,7 +9,7 @@ import HomeworkCheck from "../views/HomeworkCheckView.vue";
 import InformInfo from "../views/InformInfoView.vue";
 import MajorHome from "../views/MajorHomeView.vue";
 import CourseManage from "../components/course/CourseManage.vue";
-import StayTuned from "../components/common/StayTuned";
+import NoData from "../components/common/NoData.vue";
 
 // 使用vue-router
 Vue.use(Router);
@@ -69,36 +69,36 @@ export default new Router({
         {
           path: '/prepareLesson',
           name: 'prepareLesson',
-          component: StayTuned,
+          component: NoData,
           meta: {requireAuth: true}
         },
         {
           path: '/wellLesson',
           name: 'wellLesson',
-          component: StayTuned,
+          component: NoData,
           meta: {requireAuth: true}
         },
         {
           path: '/myWell',
           name: 'myWell',
-          component: StayTuned,
+          component: NoData,
           meta: {requireAuth: true}
         },
         {
           path: '/double',
           name: 'double',
-          component: StayTuned,
+          component: NoData,
           meta: {requireAuth: true}
         },
         {
           path: '/paperManage',
           name: 'paperManage',
-          component: StayTuned,
+          component: NoData,
           meta: {requireAuth: true}
         },
       ]
     },
-    {path: '/future', component: StayTuned},
+    {path: '/future', component: NoData},
   ]
 });
 

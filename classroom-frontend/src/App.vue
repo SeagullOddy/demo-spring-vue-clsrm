@@ -163,6 +163,10 @@ body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb, html::-webkit-scrol
   content: "\e6d9";
 }
 
+.icon-qr2_outline:before {
+  content: "\e708";
+}
+
 .el-button [class*=el-icon-] + span {
   margin-left: 5px;
 }

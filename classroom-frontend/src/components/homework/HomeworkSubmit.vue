@@ -217,13 +217,9 @@ export default {
           // this.$router.go(0)
         }
       })
-
-
       this.submitUpload()
       this.$router.go(0)
-
     },
-
     deleteFile(file) {
       if (this.fileLists.length > 1) {
         this.$axios.post("/v1/delete", {
@@ -243,8 +239,6 @@ export default {
         this.fileLists = []
       }
     },
-
-
     handleRemove(file, fileList) {
       this.$message({
         center: true,
@@ -254,7 +248,6 @@ export default {
     },
     submitUpload() {
       this.$refs.upload.submit();
-
     },
     onchange(file, fileList) {
       this.fileListNum = fileList.length
@@ -362,7 +355,7 @@ a {
 
 .s1 {
   font-size: 14px;
-  width: 100px;
+  width: 120px;
   padding-right: 35px;
   text-align: right;
   color: #010000;

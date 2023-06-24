@@ -3,9 +3,16 @@
     <div class="img-box">
       <img src="@/assets/img/img_empty.84d0931c.png" alt="">
     </div>
-    暂无课程
+    暂无数据
   </div>
 </template>
+
+
+<script>
+export default {
+  name: "NoData",
+}
+</script>
 
 <style scoped>
 .component-no_data, .component-no_data .img-box {

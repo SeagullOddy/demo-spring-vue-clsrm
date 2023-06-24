@@ -56,11 +56,11 @@
       <!--   左边   -->
       <div class="left">
         <!--     老师   -->
-        <template  v-if="info.course.identity === '1'">
+        <template v-if="info.course.identity === '1'">
           <span class="tag-flag role-t">教</span>
-          <span @click="jump()" style="cursor: pointer;">成员 {{
+          <span @click="jump()" style="cursor: pointer;"> 学生 {{
               info.course.studentNum
-            }} 人</span>
+            }} 人 </span>
         </template>
         <!--     学生   -->
         <template v-else>
@@ -133,19 +133,6 @@ export default {
       localStorage.setItem('courseView', '0')
       localStorage.setItem('courseId', this.info.course.courseId)
       this.$router.push('/courseInfo')
-    },
-    getStudentNum() {
-      this.$axios.post("/start/studentNum",
-          {courseId: this.info.course.courseId,},
-          {
-            headers: {'Authorization': this.$store.state.Authorization}
-          }).then(resp => {
-        if (resp.status === 200) {
-          this.number = resp.data
-        }
-      }).catch(resp => {
-        console.log(resp)
-      })
     },
     getTeacherName() {
       this.$axios.post("/start/teacherName",

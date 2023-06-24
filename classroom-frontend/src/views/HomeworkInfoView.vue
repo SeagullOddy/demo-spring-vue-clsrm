@@ -23,15 +23,13 @@
                         color: white;
                         border-radius: 16px;">{{ course.name }}</a>
       </div>
-      <el-tabs v-model="homeworkView" style="position:absolute;top: 6px;left: 0;width: 100%; " v-if="flag === true">
+      <el-tabs v-model="homeworkView" style="position:absolute;top: 60px;left: 0;width: 100%; " v-if="flag === true">
         <el-tab-pane name="0" v-if="identity === 0" label="提交作业">
           <HomeworkSubmit :info="{user,identity:this.identity}"></HomeworkSubmit>
         </el-tab-pane>
-
         <el-tab-pane name="0" v-else label="学生作业" style="margin-top: -60px">
           <HomeworkManage></HomeworkManage>
         </el-tab-pane>
-
         <el-tab-pane name="1" v-if="identity !== '' && flag === true" label="作业讨论">
           <HomeworkDiscussion :info="{user,identity:this.identity,course}"></HomeworkDiscussion>
         </el-tab-pane>
@@ -46,7 +44,7 @@
 <script>
 import AccountTools from "../components/tools/AccountTools.vue";
 import HomeworkManage from "../components/homework/HomeworkManage.vue";
-import StayTuned from "../components/common/StayTuned.vue";
+import NoData from "../components/common/NoData.vue";
 import HomeworkSubmit from "../components/homework/HomeworkSubmit.vue";
 import HomeworkDiscussion from "../components/homework/HomeworkDiscussion.vue";
 

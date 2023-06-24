@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="sapp">
     <!--发布作业弹窗-->
     <div class="publishWord home_work">
       <el-form ref="ruleForm" style="width: 1182px">
@@ -34,17 +34,17 @@
         <el-form-item label="是否查重" prop="needCheck" class="display" style="width:150px;margin-top: 20px">
           <el-switch v-model="needCheck"></el-switch>
         </el-form-item>
-        <el-form-item label="查重警戒值" prop="checkAlertValue" class="display" style="width:236px"
+        <el-form-item label="查重警戒值" prop="checkAlertValue" class="display" style="width:350px"
                       v-if="needCheck === true">
-          <el-input v-model="checkRate1" style="width:150px">
-            <template slot="append">%</template>
-          </el-input>
+          <el-input-number v-model="checkRate1" style="width:150px">
+          </el-input-number>
+          <span style="margin-left: 10px">%</span>
         </el-form-item>
         <el-form-item prop="duplicateCheckingRate" style="margin-left: 154px;" v-if="needCheck === true">
           <el-checkbox>查重率高于</el-checkbox>
-          <el-input v-model="checkRate2" style="width:200px">
-            <template slot="append">%自动打回</template>
-          </el-input>
+          <el-input-number v-model="checkRate2" style="margin-left:10px;width:200px">
+          </el-input-number>
+          <span style="margin-left: 10px">%自动打回</span>
         </el-form-item>
         <el-form-item>
           <el-button @click="$router.push('future')" type="primary" icon="el-icon-download"
@@ -172,11 +172,9 @@ export default {
           if (new_date.getDate() > now_date.getDate()) {
             return true;
           } else if (new_date.getDate() === now_date.getDate()) {
-            if (new_date_next > ((now_date.getHours() < 10 ? "0" + now_date.getHours() : now_date.getHours()) + ":" + (now_date.getMinutes() < 10 ? "0" + now_date.getMinutes() : now_date.getMinutes()))) {
-              return true;
-            } else {
-              return false;
-            }
+            return new_date_next > ((now_date.getHours() < 10 ? "0" + now_date.getHours()
+                : now_date.getHours()) + ":" + (now_date.getMinutes() < 10 ? "0"
+                + now_date.getMinutes() : now_date.getMinutes()));
           }
         }
       }
@@ -232,7 +230,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .w-e-toolbar {
   display: flex !important;
   padding: 0 6px !important;
@@ -248,22 +246,22 @@ export default {
   position: static !important;
 }
 
-#app {
+#sapp {
   margin: 0;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
 .home_work {
-  width: 1182px;
+  margin-top: 20px;
   padding: 20px 20px 10px;
   border: 1px solid #E2E6ED;
-  margin: auto;
 }
 
 .display {
   display: inline-block;
 }
-
-
 </style>

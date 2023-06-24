@@ -40,7 +40,7 @@
 
 <script>
 import AccountTools from "../components/tools/AccountTools.vue";
-import StayTuned from "../components/common/StayTuned.vue";
+import NoData from "../components/common/NoData.vue";
 import InformDiscussion from "../components/inform/InformDiscussion.vue";
 
 export default {
