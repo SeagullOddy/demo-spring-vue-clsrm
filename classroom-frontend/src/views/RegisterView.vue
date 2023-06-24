@@ -209,12 +209,12 @@ export default {
       this.$refs['registerForm'].validate((valid) => {
         if (valid) {
           this.$axios.post('/user/register/student', {
-            account: this.studentForm.account,
-            password: this.studentForm.password,
-            name: this.studentForm.name,
-            school: this.studentForm.school,
-            schoolNum: this.studentForm.schoolNum,
-            answer: this.studentForm.answer,
+            account: this.registerForm.account,
+            password: this.registerForm.password,
+            name: this.registerForm.name,
+            school: this.registerForm.school,
+            schoolNum: this.registerForm.schoolNum,
+            answer: this.registerForm.answer,
             answerPlus: this.answerPlus
           }).then(resp => {
             if (resp.status === 200) {

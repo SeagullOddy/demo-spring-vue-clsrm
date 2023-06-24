@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.classroomschool.Dao.StudentHomeWorkMapper">
-    <select id="selectHomework" resultType="com.example.classroomschool.Model.StudentHomeWork" parameterType="java.lang.Integer">
+<mapper namespace="com.example.classroomschool.mapper.StudentHomeWorkMapper">
+    <select id="selectHomework" resultType="com.example.classroomschool.entity.homework.StudentHomework" parameterType="java.lang.Integer">
     select
     account, phone, mailbox, name,
     school, time, file,answer,homework,

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.classroomschool.mapper.BeanStudentMapper">
+    <select id="selectStudentPlus" resultType="com.example.classroomschool.entity.student.BeanStudent" parameterType="java.lang.Integer">
+    select
+    student.id as id, account, phone, mailbox, name,school,address, school_num as schoolNum
+    from student,picture
+    where student.id = #{student,jdbcType=INTEGER} and student.account = picture.picid
+    </select>
+
+</mapper>

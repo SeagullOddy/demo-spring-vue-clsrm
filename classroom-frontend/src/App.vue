@@ -159,6 +159,14 @@ body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb, html::-webkit-scrol
   content: "\e690";
 }
 
+.el-icon-plus:before {
+  content: "\e6d9";
+}
+
+.el-button [class*=el-icon-] + span {
+  margin-left: 5px;
+}
+
 [class*=" el-icon-"], [class^=el-icon-] {
   font-family: element-icons !important;
   speak: none;
@@ -195,5 +203,18 @@ body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb, html::-webkit-scrol
   word-break: break-all;
   white-space: normal;
   -webkit-box-orient: vertical;
+}
+
+.mgl-24 {
+  margin-left: 24px;
+}
+
+.el-input--medium .el-input__inner {
+  height: 36px;
+  line-height: 36px;
+}
+
+.el-input--suffix .el-input__inner {
+  padding-right: 30px;
 }
 </style>

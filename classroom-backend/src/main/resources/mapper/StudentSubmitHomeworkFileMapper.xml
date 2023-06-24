@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.classroomschool.mapper.StudentSubmitHomeworkFileMapper" >
+  <resultMap id="BaseResultMap" type="com.example.classroomschool.entity.homework.StudentSubmitHomeworkFile" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="student" property="student" jdbcType="VARCHAR" />
+    <result column="homework" property="homework" jdbcType="INTEGER" />
+    <result column="fileurl" property="fileurl" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="file_size" property="fileSize" jdbcType="DOUBLE" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, student, homework, fileurl, filename, file_size
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sw_file
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectHomeworkByHomeworkId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sw_file
+    where homework = #{homework,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectHomework" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from sw_file
+    where student = #{studentId,jdbcType=VARCHAR} and homework = #{homework,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByMap" parameterType="map" >
+  delete from sw_file
+  where homework = #{id,jdbcType=INTEGER} and student = #{account,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteAllFile" parameterType="map" >
+  delete from sw_file
+  where homework = #{homework,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sw_file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.example.classroomschool.entity.homework.StudentSubmitHomeworkFile" >
+    insert into sw_file (id, student, homework,
+      fileurl, filename, file_size
+      )
+    values (#{id,jdbcType=INTEGER}, #{student,jdbcType=VARCHAR}, #{homework,jdbcType=INTEGER},
+      #{fileurl,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{fileSize,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.classroomschool.entity.homework.StudentSubmitHomeworkFile" >
+    insert into sw_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="student != null" >
+        student,
+      </if>
+      <if test="homework != null" >
+        homework,
+      </if>
+      <if test="fileurl != null" >
+        fileurl,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="fileSize != null" >
+        file_size,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="student != null" >
+        #{student,jdbcType=VARCHAR},
+      </if>
+      <if test="homework != null" >
+        #{homework,jdbcType=INTEGER},
+      </if>
+      <if test="fileurl != null" >
+        #{fileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.classroomschool.entity.homework.StudentSubmitHomeworkFile" >
+    update sw_file
+    <set >
+      <if test="student != null" >
+        student = #{student,jdbcType=VARCHAR},
+      </if>
+      <if test="homework != null" >
+        homework = #{homework,jdbcType=INTEGER},
+      </if>
+      <if test="fileurl != null" >
+        fileurl = #{fileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        file_size = #{fileSize,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.classroomschool.entity.homework.StudentSubmitHomeworkFile" >
+    update sw_file
+    set student = #{student,jdbcType=VARCHAR},
+      homework = #{homework,jdbcType=INTEGER},
+      fileurl = #{fileurl,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

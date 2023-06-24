@@ -65,7 +65,7 @@
                         <span class="el-dropdown-link">
                           <i class="el-icon-more"></i>
                         </span>
-                        <el-dropdown-menu slot="dropdown" style="width: 100px">
+                        <el-dropdown-menu style="width: 100px">
                           <a><el-dropdown-item>私信</el-dropdown-item></a>
                           <a @click="delInfo(item)"><el-dropdown-item>删除</el-dropdown-item></a>
                         </el-dropdown-menu>
@@ -75,7 +75,7 @@
                 </ul>
               </div>
             </div>
-            <!--            全部学生信息-->
+            <!--    全部学生信息  -->
             <div id="stu_show" v-if="chooseShowNum === 1">
               <div id="stu_show_title">
                 <div id="stu_show_title_first">
@@ -116,7 +116,7 @@
                         <span class="el-dropdown-link">
                           <i class="el-icon-more"></i>
                         </span>
-                        <el-dropdown-menu slot="dropdown" style="width: 100px">
+                        <el-dropdown-menu style="width: 100px">
                           <el-dropdown-item>私信</el-dropdown-item>
                           <a @click="delInfo(item)">
                             <el-dropdown-item>删除</el-dropdown-item>
@@ -395,10 +395,13 @@ export default {
         }).catch(resp => {
           console.log(resp.data);
         })
+      }).catch(() => {
+        this.$message({
+          center: true,
+          message: '已取消删除'
+        })
       })
-
     },
-
     getUser() {
       this.$axios.post('/start/user', {
         token: this.$store.state.Authorization

@@ -1,93 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.classroomschool.Dao.PictureMapper" >
-  <resultMap id="BaseResultMap" type="com.example.classroomschool.Model.Picture" >
+<mapper namespace="com.example.classroomschool.mapper.PictureMapper" >
+  <resultMap id="BaseResultMap" type="com.example.classroomschool.entity.picture.Picture" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="picid" property="picid" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
+
   <sql id="Base_Column_List" >
     id, picid, address
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.classroomschool.Model.PictureExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from picture
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from picture
     where id = #{id,jdbcType=INTEGER}
   </select>
-
 
   <select id="selectAddress" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
@@ -96,24 +25,18 @@
     where picid = #{account,jdbcType=VARCHAR}
   </select>
 
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from picture
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.classroomschool.Model.PictureExample" >
-    delete from picture
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.example.classroomschool.Model.Picture" >
+
+  <insert id="insert" parameterType="com.example.classroomschool.entity.picture.Picture" >
     insert into picture (id, picid, address
       )
     values (#{id,jdbcType=INTEGER}, #{picid,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.classroomschool.Model.Picture" >
+  <insert id="insertSelective" parameterType="com.example.classroomschool.entity.picture.Picture" >
     insert into picture
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -138,39 +61,8 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.classroomschool.Model.PictureExample" resultType="java.lang.Integer" >
-    select count(*) from picture
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update picture
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.picid != null" >
-        picid = #{record.picid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.address != null" >
-        address = #{record.address,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update picture
-    set id = #{record.id,jdbcType=INTEGER},
-      picid = #{record.picid,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.classroomschool.Model.Picture" >
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.classroomschool.entity.picture.Picture" >
     update picture
     <set >
       <if test="picid != null" >
@@ -182,7 +74,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.classroomschool.Model.Picture" >
+  <update id="updateByPrimaryKey" parameterType="com.example.classroomschool.entity.picture.Picture" >
     update picture
     set picid = #{picid,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR}

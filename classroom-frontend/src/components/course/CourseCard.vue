@@ -1,16 +1,20 @@
 <template>
   <div class="component-home_card">
+    <!--  教学模式  -->
+    <span v-if="info.course.teachingMode === '0'" class="tag-flag-pattern bg-r"> 线上 </span>
+    <span v-else-if="info.course.teachingMode === '1'" class="tag-flag-pattern bg-g"> 线下 </span>
+    <span v-else class="tag-flag-pattern bg-y"> 混合 </span>
     <!--  标头  -->
     <div class="header-info"
          :style="{'background':'url(' + info.course.address + ') no-repeat center'}">
       <!--   学年/学期   -->
-      <p class="time">{{ info.course.year }} {{ info.course.term }}</p>
+      <p class="time" @click="courseInfo">{{ info.course.year }} {{ info.course.term }}</p>
       <!--   课程名称   -->
-      <h3 :title="info.course.name" class="name text_overflow1">
+      <h3 :title="info.course.name" @click="courseInfo" class="name text_overflow1">
         {{ info.course.name }}
       </h3>
       <!--   班级名称   -->
-      <p :title="info.course.className" class="classname text_overflow1">
+      <p :title="info.course.className" @click="courseInfo" class="classname text_overflow1">
         {{ info.course.className }}</p>
       <!--  QRCode -->
       <div class="qrcode">
@@ -26,7 +30,7 @@
                   <i class="el-icon-arrow-down el-icon--right" style=""></i>
                 </span>
           </div>
-          <el-dropdown-menu style="width: 120px;text-align: center">
+          <el-dropdown-menu>
             <div v-if="info.course.deleting === '1'">
               <el-dropdown-item command="7">启用</el-dropdown-item>
             </div>
@@ -47,20 +51,21 @@
     </div>
     <!--  内容  -->
     <div class="content-info"></div>
+    <!--  用户信息  -->
     <div class="user-info">
       <!--   左边   -->
       <div class="left">
-        <!--     学生   -->
-        <template v-if="info.course.identify === '0'">
-          <span class="tag-flag role-s">学</span>
-          <span style="cursor: pointer;"><span>负责人： {{ teacherName }}</span></span>
-        </template>
         <!--     老师   -->
-        <template v-else>
+        <template  v-if="info.course.identity === '1'">
           <span class="tag-flag role-t">教</span>
           <span @click="jump()" style="cursor: pointer;">成员 {{
               info.course.studentNum
             }} 人</span>
+        </template>
+        <!--     学生   -->
+        <template v-else>
+          <span class="tag-flag role-s">学</span>
+          <span style="cursor: pointer;"><span>负责人： {{ teacherName }}</span></span>
         </template>
       </div>
       <!--   右边   -->
@@ -101,7 +106,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -272,6 +276,34 @@ export default {
   -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
 }
 
+.component-home_card .tag-flag-pattern.bg-r {
+  background-color: #ff6000;
+}
+
+.component-home_card .tag-flag-pattern.bg-g {
+  background-color: #00ca90;
+}
+
+.component-home_card .tag-flag-pattern.bg-y {
+  background: linear-gradient(270deg, #fac966 0, #ffe1ad);
+  color: #6b512e;
+}
+
+.component-home_card .tag-flag-pattern {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 62px;
+  height: 26px;
+  border-radius: 0 0 0 8px;
+  border-bottom: 2px solid #fff;
+  border-left: 2px solid #fff;
+  color: #ffefe5;
+  line-height: 26px;
+  font-size: 14px;
+  text-align: center;
+}
+
 .component-home_card .header-info {
   cursor: pointer;
   padding: 18px 24px;
@@ -322,6 +354,12 @@ export default {
   display: block;
   width: 14px;
   margin-right: 8px;
+}
+
+.component-home_card .content-info {
+  cursor: pointer;
+  height: 40px;
+  padding: 0 20px 16px 20px;
 }
 
 .component-home_card .user-info {

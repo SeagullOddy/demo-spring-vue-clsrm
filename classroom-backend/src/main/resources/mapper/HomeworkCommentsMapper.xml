@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.classroomschool.mapper.HomeworkCommentsMapper">
+  <resultMap id="BaseResultMap" type="com.example.classroomschool.entity.homework.HomeworkComments">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="account" property="account" jdbcType="VARCHAR"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="time" property="time" jdbcType="VARCHAR"/>
+    <result column="image" property="image" jdbcType="VARCHAR"/>
+    <result column="word" property="word" jdbcType="VARCHAR"/>
+    <result column="homeworkid" property="homeworkid" jdbcType="INTEGER"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, account, name, time, image, word, homeworkid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from comments
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectComments" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from comments
+    where homeworkid = #{homeworkId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete
+    from comments
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteComments" parameterType="java.lang.Integer">
+    delete
+    from comments
+    where homeworkid = #{homeworkId,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByMap" parameterType="map">
+    delete
+    from comments
+    where homeworkid = #{homeworkId,jdbcType=INTEGER}
+      and account = #{account,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.example.classroomschool.entity.homework.HomeworkComments">
+    insert into comments (id, account, name,
+                          time, image, word,
+                          homeworkid)
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+            #{time,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{word,jdbcType=VARCHAR},
+            #{homeworkid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.classroomschool.entity.homework.HomeworkComments">
+    insert into comments
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="word != null">
+        word,
+      </if>
+      <if test="homeworkid != null">
+        homeworkid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="word != null">
+        #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="homeworkid != null">
+        #{homeworkid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective"
+    parameterType="com.example.classroomschool.entity.homework.HomeworkComments">
+    update comments
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="word != null">
+        word = #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="homeworkid != null">
+        homeworkid = #{homeworkid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.classroomschool.entity.homework.HomeworkComments">
+    update comments
+    set account    = #{account,jdbcType=VARCHAR},
+        name       = #{name,jdbcType=VARCHAR},
+        time       = #{time,jdbcType=VARCHAR},
+        image      = #{image,jdbcType=VARCHAR},
+        word       = #{word,jdbcType=VARCHAR},
+        homeworkid = #{homeworkid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.classroomschool.mapper.StudentCourseMapper" >
+  <resultMap id="BaseResultMap" type="com.example.classroomschool.entity.course.StudentCourse" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="student" property="student" jdbcType="INTEGER" />
+    <result column="course" property="course" jdbcType="INTEGER" />
+    <result column="pigeonhole" property="pigeonhole" jdbcType="VARCHAR" />
+    <result column="top" property="top" jdbcType="VARCHAR" />
+    <result column="display_num" property="displayNum" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, student, course, pigeonhole, top, display_num
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sc
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectSc" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sc
+    where student = #{student,jdbcType=INTEGER} and course = #{course,jdbcType=INTEGER}
+  </select>
+  <select id="listStudent" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sc
+    where student = #{student,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllSc" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sc
+    where course = #{course,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByStudentTop" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sc
+    where student = #{student,jdbcType=INTEGER} and top = '1'
+  </select>
+  <select id="selectByStudentPigeonhole" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sc
+    where student = #{student,jdbcType=INTEGER} and pigeonhole = '1'
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sc
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="courseDelete" parameterType="map" >
+    delete from sc
+    where student = #{student,jdbcType=INTEGER} and course = #{course,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByCourse" parameterType="java.lang.Integer" >
+    delete from sc
+    where course = #{course,jdbcType=INTEGER}
+  </delete>
+
+  <update id="changeTop" parameterType="map" >
+    update
+    sc
+    set
+    top = #{top,jdbcType=VARCHAR}
+    where student = #{id,jdbcType=INTEGER} and course = #{courseId,jdbcType=INTEGER}
+  </update>
+
+  <update id="pigeonholeC" parameterType="map" >
+    update
+    sc
+    set
+    pigeonhole = #{pigeonhole,jdbcType=VARCHAR}
+    where student = #{student,jdbcType=INTEGER} and course = #{course,jdbcType=INTEGER}
+  </update>
+  <update id="pigeonholeTheCourse" parameterType="map" >
+    update
+    sc
+    set
+    pigeonhole = #{pigeonhole,jdbcType=VARCHAR}
+    where  course = #{course,jdbcType=INTEGER}
+  </update>
+
+  <update id="sortNumber" parameterType="map" >
+    update
+    sc
+    set
+     display_num = #{displayNum,jdbcType=INTEGER}
+    where course = #{course,jdbcType=INTEGER} and student = #{student,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insert" parameterType="com.example.classroomschool.entity.course.StudentCourse" >
+    insert into sc (id, student, course,
+      pigeonhole, top, display_num
+      )
+    values (#{id,jdbcType=INTEGER}, #{student,jdbcType=INTEGER}, #{course,jdbcType=INTEGER},
+      #{pigeonhole,jdbcType=VARCHAR}, #{top,jdbcType=VARCHAR}, #{displayNum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.classroomschool.entity.course.StudentCourse" >
+    insert into sc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="student != null" >
+        student,
+      </if>
+      <if test="course != null" >
+        course,
+      </if>
+      <if test="pigeonhole != null" >
+        pigeonhole,
+      </if>
+      <if test="top != null" >
+        top,
+      </if>
+      <if test="displayNum != null" >
+        display_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="student != null" >
+        #{student,jdbcType=INTEGER},
+      </if>
+      <if test="course != null" >
+        #{course,jdbcType=INTEGER},
+      </if>
+      <if test="pigeonhole != null" >
+        #{pigeonhole,jdbcType=VARCHAR},
+      </if>
+      <if test="top != null" >
+        #{top,jdbcType=VARCHAR},
+      </if>
+      <if test="displayNum != null" >
+        #{displayNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.classroomschool.entity.course.StudentCourse" >
+    update sc
+    <set >
+      <if test="student != null" >
+        student = #{student,jdbcType=INTEGER},
+      </if>
+      <if test="course != null" >
+        course = #{course,jdbcType=INTEGER},
+      </if>
+      <if test="pigeonhole != null" >
+        pigeonhole = #{pigeonhole,jdbcType=VARCHAR},
+      </if>
+      <if test="top != null" >
+        top = #{top,jdbcType=VARCHAR},
+      </if>
+      <if test="displayNum != null" >
+        display_num = #{displayNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.classroomschool.entity.course.StudentCourse" >
+    update sc
+    set student = #{student,jdbcType=INTEGER},
+      course = #{course,jdbcType=INTEGER},
+      pigeonhole = #{pigeonhole,jdbcType=VARCHAR},
+      top = #{top,jdbcType=VARCHAR},
+      display_num = #{displayNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

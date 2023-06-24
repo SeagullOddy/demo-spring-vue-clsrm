@@ -1,300 +1,170 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.classroomschool.Dao.CourseMapper" >
-  <resultMap id="BaseResultMap" type="com.example.classroomschool.Model.Course" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="class_name" property="className" jdbcType="VARCHAR" />
-    <result column="master" property="master" jdbcType="INTEGER" />
-    <result column="course_key" property="courseKey" jdbcType="VARCHAR" />
-    <result column="deleting" property="deleting" jdbcType="VARCHAR" />
-    <result column="year" property="year" jdbcType="VARCHAR" />
-    <result column="term" property="term" jdbcType="VARCHAR" />
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.classroomschool.mapper.CourseMapper">
+  <resultMap id="BaseResultMap" type="com.example.classroomschool.entity.course.Course">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="class_name" property="className" jdbcType="VARCHAR"/>
+    <result column="master" property="master" jdbcType="INTEGER"/>
+    <result column="course_key" property="courseKey" jdbcType="VARCHAR"/>
+    <result column="deleting" property="deleting" jdbcType="VARCHAR"/>
+    <result column="year" property="year" jdbcType="VARCHAR"/>
+    <result column="term" property="term" jdbcType="VARCHAR"/>
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+
+  <sql id="Base_Column_List">
     id, name, class_name, master, course_key, deleting, year, term
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.classroomschool.Model.CourseExample" >
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from course
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from course
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectCourse" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectCourse" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from course
     where course_key = #{key,jdbcType=VARCHAR}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from course
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete
+    from course
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.classroomschool.Model.CourseExample" >
-    delete from course
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.example.classroomschool.Model.Course" >
-    insert into course (id, name, class_name, 
-      master, course_key, deleting, 
-      year, term)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, 
-      #{master,jdbcType=INTEGER}, #{courseKey,jdbcType=VARCHAR}, #{deleting,jdbcType=VARCHAR}, 
-      #{year,jdbcType=VARCHAR}, #{term,jdbcType=VARCHAR})
+
+  <insert id="insert" parameterType="com.example.classroomschool.entity.course.Course">
+    insert into course (id, name, class_name,
+                        master, course_key, deleting,
+                        year, term)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR},
+            #{master,jdbcType=INTEGER}, #{courseKey,jdbcType=VARCHAR}, #{deleting,jdbcType=VARCHAR},
+            #{year,jdbcType=VARCHAR}, #{term,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.classroomschool.Model.Course" >
+  <insert id="insertSelective" parameterType="com.example.classroomschool.entity.course.Course">
     insert into course
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="className != null" >
+      <if test="className != null">
         class_name,
       </if>
-      <if test="master != null" >
+      <if test="master != null">
         master,
       </if>
-      <if test="courseKey != null" >
+      <if test="courseKey != null">
         course_key,
       </if>
-      <if test="deleting != null" >
+      <if test="deleting != null">
         deleting,
       </if>
-      <if test="year != null" >
+      <if test="year != null">
         year,
       </if>
-      <if test="term != null" >
+      <if test="term != null">
         term,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="className != null" >
+      <if test="className != null">
         #{className,jdbcType=VARCHAR},
       </if>
-      <if test="master != null" >
+      <if test="master != null">
         #{master,jdbcType=INTEGER},
       </if>
-      <if test="courseKey != null" >
+      <if test="courseKey != null">
         #{courseKey,jdbcType=VARCHAR},
       </if>
-      <if test="deleting != null" >
+      <if test="deleting != null">
         #{deleting,jdbcType=VARCHAR},
       </if>
-      <if test="year != null" >
+      <if test="year != null">
         #{year,jdbcType=VARCHAR},
       </if>
-      <if test="term != null" >
+      <if test="term != null">
         #{term,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.classroomschool.Model.CourseExample" resultType="java.lang.Integer" >
-    select count(*) from course
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update course
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.className != null" >
-        class_name = #{record.className,jdbcType=VARCHAR},
-      </if>
-      <if test="record.master != null" >
-        master = #{record.master,jdbcType=INTEGER},
-      </if>
-      <if test="record.courseKey != null" >
-        course_key = #{record.courseKey,jdbcType=VARCHAR},
-      </if>
-      <if test="record.deleting != null" >
-        deleting = #{record.deleting,jdbcType=VARCHAR},
-      </if>
-      <if test="record.year != null" >
-        year = #{record.year,jdbcType=VARCHAR},
-      </if>
-      <if test="record.term != null" >
-        term = #{record.term,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update course
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      class_name = #{record.className,jdbcType=VARCHAR},
-      master = #{record.master,jdbcType=INTEGER},
-      course_key = #{record.courseKey,jdbcType=VARCHAR},
-      deleting = #{record.deleting,jdbcType=VARCHAR},
-      year = #{record.year,jdbcType=VARCHAR},
-      term = #{record.term,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
 
-  <update id="updateCourse" parameterType="map" >
+  <update id="updateCourse" parameterType="map">
     update course
-    set
-      name = #{name,jdbcType=VARCHAR},
-      class_name = #{classname,jdbcType=VARCHAR},
-      year = #{year,jdbcType=VARCHAR},
-      term = #{term,jdbcType=VARCHAR}
-    where
-    id = #{id,jdbcType=INTEGER} and master = #{master,jdbcType=INTEGER}
+    set name       = #{name,jdbcType=VARCHAR},
+        class_name = #{classname,jdbcType=VARCHAR},
+        year       = #{year,jdbcType=VARCHAR},
+        term       = #{term,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+      and master = #{master,jdbcType=INTEGER}
 
   </update>
 
-  <update id="updateDeleting" parameterType="map" >
+  <update id="updateDeleting" parameterType="map">
     update course
-    set
-      deleting = #{stopKey,jdbcType=VARCHAR}
-    where
-      id = #{id,jdbcType=INTEGER}
+    set deleting = #{stopKey,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateKey" parameterType="map" >
+  <update id="updateKey" parameterType="map">
     update course
-    set
-      course_key = #{newKey,jdbcType=VARCHAR}
-    where
-      id = #{id,jdbcType=INTEGER}
+    set course_key = #{newKey,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.classroomschool.Model.Course" >
+  <update id="updateByPrimaryKeySelective"
+    parameterType="com.example.classroomschool.entity.course.Course">
     update course
-    <set >
-      <if test="name != null" >
+    <set>
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="className != null" >
+      <if test="className != null">
         class_name = #{className,jdbcType=VARCHAR},
       </if>
-      <if test="master != null" >
+      <if test="master != null">
         master = #{master,jdbcType=INTEGER},
       </if>
-      <if test="courseKey != null" >
+      <if test="courseKey != null">
         course_key = #{courseKey,jdbcType=VARCHAR},
       </if>
-      <if test="deleting != null" >
+      <if test="deleting != null">
         deleting = #{deleting,jdbcType=VARCHAR},
       </if>
-      <if test="year != null" >
+      <if test="year != null">
         year = #{year,jdbcType=VARCHAR},
       </if>
-      <if test="term != null" >
+      <if test="term != null">
         term = #{term,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.classroomschool.Model.Course" >
+  <update id="updateByPrimaryKey" parameterType="com.example.classroomschool.entity.course.Course">
     update course
-    set name = #{name,jdbcType=VARCHAR},
-      class_name = #{className,jdbcType=VARCHAR},
-      master = #{master,jdbcType=INTEGER},
-      course_key = #{courseKey,jdbcType=VARCHAR},
-      deleting = #{deleting,jdbcType=VARCHAR},
-      year = #{year,jdbcType=VARCHAR},
-      term = #{term,jdbcType=VARCHAR}
+    set name       = #{name,jdbcType=VARCHAR},
+        class_name = #{className,jdbcType=VARCHAR},
+        master     = #{master,jdbcType=INTEGER},
+        course_key = #{courseKey,jdbcType=VARCHAR},
+        deleting   = #{deleting,jdbcType=VARCHAR},
+        year       = #{year,jdbcType=VARCHAR},
+        term       = #{term,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <update id="updateTeacher" parameterType="com.example.classroomschool.Model.Course" >
+  <update id="updateTeacher" parameterType="com.example.classroomschool.entity.course.Course">
     update course
-    set
-      master = #{id,jdbcType=INTEGER}
-    where  id = #{courseId,jdbcType=INTEGER}
+    set master = #{id,jdbcType=INTEGER}
+    where id = #{courseId,jdbcType=INTEGER}
   </update>
 </mapper>

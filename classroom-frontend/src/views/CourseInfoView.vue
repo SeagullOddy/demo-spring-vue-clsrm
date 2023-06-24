@@ -60,7 +60,7 @@
                 <span>{{ course.deleting === '1' ? "已停用" : course.courseKey }}</span>
                 <i class="el-icon-arrow-down el-icon--right" style=""></i>
               </div>
-              <el-dropdown-menu slot="dropdown" style="width: 120px;text-align: center">
+              <el-dropdown-menu style="width: 120px;text-align: center">
                 <div v-if="course.deleting === '1'">
                   <el-dropdown-item command="1">启用</el-dropdown-item>
                 </div>
