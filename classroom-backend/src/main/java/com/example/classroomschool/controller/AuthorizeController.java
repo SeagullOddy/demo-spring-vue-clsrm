@@ -60,13 +60,15 @@ public class AuthorizeController {
       // 用账号生成 jwt token 并验证
       String token = TokenUtil.sign("ROLE_student", authorizeStudent.getAccount());
       HashMap<String, Object> responseMap = new HashMap<>();
+      //验证token能不能用，没必要的
       if (TokenUtil.verify(token)) {
         responseMap.put("code", 200);
       } else {
         responseMap.put("code", 500);
       }
-      responseMap.put("role", 0);
+      responseMap.put("role", 0); // 学生
       responseMap.put("token", token);
+      // 查这个学生的信息
       String account = TokenUtil.getAccount(token);
       AuthorizeStudent stu = studentService.findByAccount(account);
       responseMap.put("user", stu);
@@ -90,8 +92,6 @@ public class AuthorizeController {
       String account = TokenUtil.getAccount(token);
       AuthorizeTeacher tea = teacherService.findByAccount(account);
       responseMap.put("user", tea);
-//      Student stu = studentService.existenceAccount(account);
-//      responseMap.put("user", stu);
       ObjectMapper objectMapper = new ObjectMapper();
       return objectMapper.writeValueAsString(responseMap);
     }
@@ -110,11 +110,13 @@ public class AuthorizeController {
 
     // 校验验证码
     MD5Encoder md5Encoder = new MD5Encoder();
+    //（加密后判断）
     if (!md5Encoder.encode(data.get("answer")).equals(data.get("answerPlus"))) {
       return "验证码错误";
     }
 
     // 校验账号是否已经存在
+    // 验证邮箱/电话是否已经存在
     if (data.get("account").contains("@")) {
       mailbox = data.get("account");
       // 验证邮箱是否已经存在
@@ -135,7 +137,7 @@ public class AuthorizeController {
       authorizeStudent.setPhone(phone);
     }
 
-    // 随机生成账号
+    // 随机生成账号，有可能重复
     while (true) {
       account = RandomUtil.randomAccount(false);
       if (studentService.findByAccount(account) == null) {
@@ -152,6 +154,7 @@ public class AuthorizeController {
 
     // 添加头像图片
     String address = RandomUtil.randomAvatarAddress();
+    //头像
     Picture avatar = new Picture();
     avatar.setPicid(account);
     avatar.setAddress(address);
@@ -258,6 +261,7 @@ public class AuthorizeController {
     HashMap<String, String> responseMap = new HashMap<>();
     responseMap.put("code", equation);
     MD5Encoder md5Encoder = new MD5Encoder();
+    // 将结果加密后返回
     responseMap.put("answerPlus", md5Encoder.encode(String.valueOf(result)));
     ObjectMapper objectMapper = new ObjectMapper();
     return objectMapper.writeValueAsString(responseMap);

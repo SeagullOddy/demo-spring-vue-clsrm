@@ -116,6 +116,7 @@ export default {
     },
     // 发送登录请求，解析后台返回的json对象
     login() {
+      //表单验证
       this.$refs['accountForm'].validate(valid => {
         if (valid) {
           // 向后端发动请求

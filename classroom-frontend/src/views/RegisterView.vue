@@ -206,6 +206,7 @@ export default {
       });
     },
     studentRegister() {
+      //表单验证
       this.$refs['registerForm'].validate((valid) => {
         if (valid) {
           this.$axios.post('/user/register/student', {
@@ -217,6 +218,7 @@ export default {
             answer: this.registerForm.answer,
             answerPlus: this.answerPlus
           }).then(resp => {
+            // 访问成功
             if (resp.status === 200) {
               this.$message({
                 showClose: true,
@@ -224,6 +226,7 @@ export default {
                 offset: this.$store.state.tip,
                 message: resp.data
               })
+              // 注册成功
               if (resp.data === '注册成功') {
                 this.$router.push('/login');
               }

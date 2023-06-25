@@ -53,7 +53,8 @@
             </div>
             <!--      学生    -->
             <div v-else class="flex-align" style="font-size:14px;font-weight:400;margin-top: 50px">
-              <i @click="jump(0, 0)" class="font_family icon-qr2_outline" style="margin-right: 5px"></i>
+              <i @click="jump(0, 0)" class="font_family icon-qr2_outline"
+                 style="margin-right: 5px"></i>
               <span class="jump">
               加课码：{{ course.courseKey }}
               </span>
@@ -93,33 +94,36 @@
       </div>
       <!--   tabs   -->
       <el-tabs v-model="view">
-        <el-tab-pane name="0" label="目录">
-          <NoData></NoData>
-        </el-tab-pane>
-        <el-tab-pane name="1" label="互动课件">
-          <NoData></NoData>
-        </el-tab-pane>
-        <el-tab-pane name="2" label="作业" v-if="flag">
-          <Homework :info="{user,homework,identity}"></Homework>
-        </el-tab-pane>
-        <el-tab-pane name="3" label="测试">
-          <NoData></NoData>
-        </el-tab-pane>
-        <el-tab-pane name="4" label="资料">
-          <NoData></NoData>
-        </el-tab-pane>
-        <el-tab-pane name="5" label="腾讯会议">
-          <NoData></NoData>
-        </el-tab-pane>
-        <el-tab-pane name="6" label="公告" v-if="flag">
-          <Inform :info="{user,identity,course}"></Inform>
-        </el-tab-pane>
-        <el-tab-pane name="7" label="话题">
-          <NoData></NoData>
-        </el-tab-pane>
-        <el-tab-pane name="8" label="互动答题">
-          <NoData></NoData>
-        </el-tab-pane>
+        <!--     课程学习   -->
+        <template>
+          <el-tab-pane name="0" label="目录">
+            <NoData></NoData>
+          </el-tab-pane>
+          <el-tab-pane name="1" label="互动课件">
+            <NoData></NoData>
+          </el-tab-pane>
+          <el-tab-pane name="2" label="作业" v-if="flag">
+            <Homework :info="{user,homework,identity}"></Homework>
+          </el-tab-pane>
+          <el-tab-pane name="3" label="测试">
+            <NoData></NoData>
+          </el-tab-pane>
+          <el-tab-pane name="4" label="资料">
+            <NoData></NoData>
+          </el-tab-pane>
+          <el-tab-pane name="5" label="腾讯会议">
+            <NoData></NoData>
+          </el-tab-pane>
+          <el-tab-pane name="6" label="公告" v-if="flag">
+            <Inform :info="{user,identity,course}"></Inform>
+          </el-tab-pane>
+          <el-tab-pane name="7" label="话题">
+            <NoData></NoData>
+          </el-tab-pane>
+          <el-tab-pane name="8" label="互动答题">
+            <NoData></NoData>
+          </el-tab-pane>
+        </template>
       </el-tabs>
     </div>
     <FloatTools></FloatTools>
