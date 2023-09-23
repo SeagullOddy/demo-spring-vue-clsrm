@@ -43,7 +43,7 @@
       </div>
       <div class="reviewwrap">
         <div class="select-group">
-          <ul class="typehead">
+          <ul class="typehead" style="margin-top: 20px">
             <li class="body_next_1" datatype="text">
               <div id="studyNumTitle" class="dt"><i class="downdot"></i></div>
             </li>
@@ -235,8 +235,8 @@ export default {
     if (this.selectedAll === true) {
       this.studentHomework.select = true;
     } else {
-      for (var h = 0; h < this.studentHomework.length; h++) {
-        this.studentHomework[h].select = false;
+      for (const element of this.studentHomework) {
+        element.select = false;
       }
     }
   }
@@ -330,6 +330,8 @@ export default {
   padding: 5px 20px;
   margin-right: 10px;
   background: rgba(0, 0, 0, .1);
+  font-size: 14px;
+  margin-top: -5px;
 }
 
 .new-page {
@@ -337,15 +339,6 @@ export default {
   border: 1px solid #c8c8c8;
   width: 1020px;
   margin: 40px auto;
-}
-
-.head-title .togsh p {
-  padding: 5px 20px;
-  margin-right: 10px;
-  background: rgba(0, 0, 0, .1);
-  font-size: 14px;
-  width: 151px;
-  margin-top: -5px;
 }
 
 .check {

@@ -17,6 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Resource;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,7 +39,7 @@ public class AuthorizeController {
   /**
    * 登录
    */
-  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  @PostMapping(value = "/login")
   public String loginStudent(@RequestBody Map<String, String> data)
       throws JsonProcessingException, UnsupportedEncodingException, NoSuchAlgorithmException {
     // 通过邮箱/手机号查找用户

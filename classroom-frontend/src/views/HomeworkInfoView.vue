@@ -23,14 +23,14 @@
                         color: white;
                         border-radius: 16px;">{{ course.name }}</a>
       </div>
-      <el-tabs v-model="homeworkView" style="position:absolute;top: 60px;left: 0;width: 100%; " v-if="flag === true">
-        <el-tab-pane name="0" v-if="identity === 0" label="提交作业">
+      <el-tabs v-model="homeworkView" style="position:absolute;top: 60px;left: 60px;width: 100%; " v-if="flag === true">
+        <el-tab-pane name="0" v-if="identity === 0" label="提交作业" style="margin-left: -60px">
           <HomeworkSubmit :info="{user,identity:this.identity}"></HomeworkSubmit>
         </el-tab-pane>
-        <el-tab-pane name="0" v-else label="学生作业" style="margin-top: -60px">
+        <el-tab-pane name="0" v-else label="学生作业" style="margin-top: -60px;margin-left: -60px">
           <HomeworkManage></HomeworkManage>
         </el-tab-pane>
-        <el-tab-pane name="1" v-if="identity !== '' && flag === true" label="作业讨论">
+        <el-tab-pane name="1" v-if="identity !== '' && flag === true" label="作业讨论" style="margin-left: -60px">
           <HomeworkDiscussion :info="{user,identity:this.identity,course}"></HomeworkDiscussion>
         </el-tab-pane>
       </el-tabs>
